@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>四篇必背古詩文 · 詞語與全句語法修辭精練系統</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .view-page { display: none; }
+        .view-page.active { display: block; }
+    </style>
+</head>
+<body>
+    <!-- 頂部導航欄 -->
+    <header class="navbar">
+        <div class="navbar-inner">
+            <div class="brand-logo" onclick="app.handleNavHome()">
+                <span class="logo-tag">古詩文精練</span>
+                <span class="logo-title">四篇必背詩文 · 詞語與全句語法修辭練習系統</span>
+            </div>
+            <div class="navbar-right">
+                <span id="questionCountStatus" class="status-badge">題庫檢測中...</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- 主內容容器 -->
+    <main class="container">
+
+        <!-- ==================== 頁面 1：首頁（兩大區入口按鈕） ==================== -->
+        <section id="homeView" class="view-page active">
+            <div class="hero-header">
+                <h1>請選擇古詩文練習專區</h1>
+                <p>完整收錄《歸去來兮辭》（並序）、《將進酒》、《兵車行》、《登高》四篇必背經典 · 詞語高亮精解 · 全句語法修辭全析 · 當次錯題無限重練直至全對</p>
+            </div>
+
+            <div class="big-zones-grid">
+                <!-- 第一大區按鈕：單獨課文練習 -->
+                <div class="big-zone-btn zone-theme-blue" onclick="app.openMajorZone('zone1')">
+                    <div class="zone-icon-wrap">📜</div>
+                    <div class="zone-badge">第一大區</div>
+                    <h2>單獨課文練習區</h2>
+                    <p>按單篇課文獨立劃分（《歸去來兮辭》、《將進酒》、《兵車行》、《登高》）。每篇課文均細分為「パート A：句中高亮詞語解釋與作用」與「パート B：全句翻譯、修辭、句式、活用、古今異義、通假字全析」兩小區。</p>
+                    <div class="zone-enter-text">進入選擇課文與小區 ➔</div>
+                </div>
+
+                <!-- 第二大區按鈕：四篇全庫綜合練習 -->
+                <div class="big-zone-btn zone-theme-purple" onclick="app.openMajorZone('zone2')">
+                    <div class="zone-icon-wrap">🏛️</div>
+                    <div class="zone-badge">第二大區</div>
+                    <h2>四篇全庫綜合區</h2>
+                    <p>將四篇課文全部打通混合抽取，格式與第一大區完全一致，同樣細分為「四篇綜合 · 詞語高亮解釋與作用」與「四篇綜合 · 全句修辭、句式、活用、古今異義全析」兩小區，全面檢驗背默與語法掌握度。</p>
+                    <div class="zone-enter-text">進入四篇綜合練習 ➔</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== 頁面 2：小區列表頁 ==================== -->
+        <section id="subZoneView" class="view-page">
+            <div class="subzone-topbar">
+                <button class="btn btn-back" onclick="app.backToHome()">
+                    ⬅ 返回兩大區首頁
+                </button>
+                <div class="subzone-title-wrap">
+                    <span id="subZoneTag" class="subzone-tag">第一大區</span>
+                    <h2 id="subZoneTitle">單獨課文練習區</h2>
+                    <p id="subZoneDesc">請選擇下方任意一篇課文的「詞語精解」或「全句語法修辭全析」小區開始練習</p>
+                </div>
+            </div>
+
+            <!-- 小區卡片網格（由 app.js 動態生成） -->
+            <div id="subZoneGrid" class="subzone-grid"></div>
+        </section>
+
+        <!-- ==================== 頁面 3：自測刷題作答頁 ==================== -->
+        <section id="quizView" class="view-page">
+            <!-- 刷題頂部控制欄 -->
+            <div class="quiz-header-card">
+                <div class="quiz-title-group">
+                    <span id="roundBadge" class="round-pill">第 1 輪：正式自測</span>
+                    <h2 id="activeQuizTitle">《歸去來兮辭》（並序） · 詞語精解</h2>
+                </div>
+                <div class="quiz-action-group">
+                    <button class="btn btn-warning btn-sm" onclick="app.submitEarly()">提前結算本輪</button>
+                    <button class="btn btn-danger btn-sm" onclick="app.exitQuizSession()">🚪 退出練習</button>
+                </div>
+            </div>
+
+            <!-- 答題進度條 -->
+            <div class="progress-card">
+                <div class="progress-info">
+                    <span id="progressCountText">已完成自評 0 / 0 題 (0%)</span>
+                    <span id="currentPosText">當前：第 1 題</span>
+                </div>
+                <div class="progress-bar-bg">
+                    <div id="progressBarFill" class="progress-bar-fill" style="width: 0%;"></div>
+                </div>
+            </div>
+
+            <!-- 答題主體雙欄 -->
+            <div class="quiz-body-grid">
+                <!-- 左側：題目、我做完了按鈕、完整答案解析、我做對了/我做錯了按鈕 -->
+                <div class="question-card">
+                    <div id="questionRenderArea"></div>
+
+                    <div class="question-footer-nav">
+                        <button id="prevBtn" class="btn btn-outline" onclick="app.prevQuestion()">⬅ 上一題</button>
+                        <span class="shortcut-tip">快捷鍵：空白鍵「我做完了」｜數字 1「我做對了」｜數字 2「我做錯了」｜左右方向鍵切題</span>
+                        <button id="nextBtn" class="btn btn-primary" onclick="app.nextQuestion()">下一題 ➡</button>
+                        <button id="finishBtn" class="btn btn-success" onclick="app.submitQuiz(false)">✅ 結算本輪</button>
+                    </div>
+                </div>
+
+                <!-- 右側：題號答題卡面板 -->
+                <aside class="sheet-card">
+                    <div class="sheet-header">
+                        <h4>自測答題卡</h4>
+                        <div class="sheet-legend">
+                            <span><i class="dot right"></i>做對</span>
+                            <span><i class="dot wrong"></i>做錯</span>
+                            <span><i class="dot cur"></i>當前</span>
+                            <span><i class="dot todo"></i>未做</span>
+                        </div>
+                    </div>
+                    <div id="sheetGrid" class="sheet-grid"></div>
+                    <button class="btn btn-success btn-block" onclick="app.submitQuiz(false)">✅ 提交本輪並查看錯題</button>
+                </aside>
+            </div>
+        </section>
+
+        <!-- ==================== 頁面 4：本輪結算與錯題重練頁 ==================== -->
+        <section id="resultView" class="view-page">
+            <!-- 結算大卡片 -->
+            <div id="resultBannerCard" class="result-banner-card"></div>
+
+            <!-- 題目解析篩選欄 -->
+            <div class="review-toolbar">
+                <h3>📖 本輪自測詳情與完整解析</h3>
+                <div class="filter-group">
+                    <button class="filter-pill active" data-filter="all" onclick="app.renderReviewList('all')">
+                        全部 (<span id="numAll">0</span>)
+                    </button>
+                    <button class="filter-pill" data-filter="wrong" onclick="app.renderReviewList('wrong')">
+                        本輪做錯/未做 (<span id="numWrong">0</span>)
+                    </button>
+                    <button class="filter-pill" data-filter="correct" onclick="app.renderReviewList('correct')">
+                        我做對了 (<span id="numCorrect">0</span>)
+                    </button>
+                </div>
+            </div>
+
+            <!-- 詳細解析列表 -->
+            <div id="reviewContainer" class="review-list"></div>
+        </section>
+
+    </main>
+
+    <!-- 引入題庫數據與核心邏輯腳本（將在下一則訊息提供） -->
+    <script src="questions_data.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
