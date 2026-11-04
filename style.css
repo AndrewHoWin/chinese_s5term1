@@ -47,9 +47,8 @@ body {
     padding-bottom: 64px;
 }
 
-/* ==================== 頂部導航欄 ==================== */
 .navbar {
-    background: rgba(255, 255, 255, 0.92);
+    background: rgba(255, 255, 255, 0.94);
     backdrop-filter: blur(10px);
     border-bottom: 1px solid var(--border);
     position: sticky;
@@ -66,6 +65,7 @@ body {
     justify-content: space-between;
     align-items: center;
     gap: 12px;
+    flex-wrap: wrap;
 }
 
 .brand-logo {
@@ -95,16 +95,15 @@ body {
 }
 
 .status-badge {
-    background: #fef3c7;
-    color: #92400e;
-    border: 1px solid #fde68a;
+    background: #dcfce7;
+    color: #166534;
+    border: 1px solid #86efac;
     padding: 5px 14px;
     border-radius: 999px;
     font-size: 0.85rem;
-    font-weight: 700;
+    font-weight: 800;
 }
 
-/* ==================== 主容器與頁面切換 ==================== */
 .container {
     max-width: 1220px;
     margin: 34px auto;
@@ -173,8 +172,6 @@ body {
     flex-direction: column;
     align-items: center;
     text-align: center;
-    position: relative;
-    overflow: hidden;
 }
 
 .big-zone-btn:hover {
@@ -241,7 +238,6 @@ body {
     font-weight: 800;
     font-size: 1rem;
     transition: all 0.2s ease;
-    letter-spacing: 0.5px;
 }
 
 .zone-theme-blue .zone-enter-text { background: var(--primary); color: #fff; }
@@ -306,13 +302,12 @@ body {
     margin-top: 2px;
 }
 
-/* 單篇課文分組區塊與小區卡片 */
 .lesson-section-block {
-    background: rgba(255, 255, 255, 0.65);
+    background: rgba(255, 255, 255, 0.72);
     border: 1px solid var(--border);
     border-radius: var(--radius-lg);
-    padding: 24px;
-    margin-bottom: 24px;
+    padding: 26px;
+    margin-bottom: 26px;
     box-shadow: var(--shadow-sm);
 }
 
@@ -345,12 +340,6 @@ body {
     padding: 3px 10px;
     border-radius: 6px;
     font-family: sans-serif;
-}
-
-.subzone-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-    gap: 22px;
 }
 
 .subzone-inner-grid {
@@ -507,7 +496,7 @@ body {
 }
 
 .quiz-title-group h2 {
-    font-size: 1.25rem;
+    font-size: 1.22rem;
     font-weight: 800;
     font-family: var(--font-serif);
 }
@@ -532,6 +521,21 @@ body {
     align-items: center;
     gap: 10px;
     flex-wrap: wrap;
+}
+
+.toggle-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #fafaf9;
+    border: 1px solid var(--border-strong);
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--text-secondary);
+    cursor: pointer;
+    user-select: none;
 }
 
 .progress-card {
@@ -613,7 +617,6 @@ body {
     color: var(--purple);
 }
 
-/* 古詩文原句展示框與高亮詞語 */
 .classical-sentence-box {
     background: linear-gradient(180deg, #fafaf9 0%, #f5f5f4 100%);
     border: 2px solid #e7e5e4;
@@ -628,21 +631,18 @@ body {
     line-height: 1.85;
     letter-spacing: 1px;
     text-align: center;
-    box-shadow: inset 0 1px 0 rgba(255,255,255,0.8);
 }
 
-/* 句中目標詞語 Highlight 樣式 */
 .hl-word {
     background: linear-gradient(120deg, #fef08a 0%, #fde047 100%);
     color: #991b1b;
-    padding: 3px 12px;
-    margin: 0 4px;
+    padding: 2px 10px;
+    margin: 0 3px;
     border-radius: 8px;
     border-bottom: 3px solid #dc2626;
     font-weight: 900;
     box-shadow: 0 3px 10px rgba(220, 38, 38, 0.18);
     display: inline-block;
-    transform: translateY(-1px);
 }
 
 .q-prompt-hint {
@@ -659,7 +659,6 @@ body {
     color: var(--primary-dark);
 }
 
-/* 「我做完了」按鈕區塊 */
 .reveal-action-wrap {
     text-align: center;
     margin: 26px 0 14px 0;
@@ -676,7 +675,6 @@ body {
     cursor: pointer;
     box-shadow: 0 10px 20px -5px rgba(30, 64, 175, 0.35);
     transition: all 0.2s ease;
-    letter-spacing: 0.5px;
 }
 
 .btn-reveal:hover {
@@ -684,7 +682,6 @@ body {
     box-shadow: 0 14px 24px -5px rgba(30, 64, 175, 0.45);
 }
 
-/* 答案與完整解析展開框 */
 .exp-box {
     margin-top: 22px;
     background: #ffffff;
@@ -703,9 +700,6 @@ body {
     padding-bottom: 10px;
     border-bottom: 1px solid var(--border);
     font-size: 1.12rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
 }
 
 .analysis-grid {
@@ -758,7 +752,6 @@ body {
     word-break: break-word;
 }
 
-/* 「我做對了」與「我做錯了」自評按鈕區 */
 .self-judge-box {
     margin-top: 22px;
     padding: 20px;
@@ -843,7 +836,6 @@ body {
     color: var(--text-muted);
 }
 
-/* ==================== 答題卡側邊欄 ==================== */
 .sheet-card {
     background: var(--bg-card);
     border-radius: var(--radius-md);
@@ -899,7 +891,6 @@ body {
     font-weight: 700;
     font-size: 0.86rem;
     cursor: pointer;
-    transition: all 0.12s ease;
 }
 
 .sheet-btn.mark-right {
@@ -919,7 +910,7 @@ body {
     font-weight: 900;
 }
 
-/* ==================== 頁面 4：本輪結算與錯題重練頁 ==================== */
+/* ==================== 頁面 4：結算與錯題重練頁 ==================== */
 .result-banner-card {
     background: var(--bg-card);
     border-radius: var(--radius-lg);
