@@ -5,10 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>四篇必背古詩文 · 詞語與全句語法修辭精練系統</title>
     <link rel="stylesheet" href="style.css">
-    <style>
-        .view-page { display: none; }
-        .view-page.active { display: block; }
-    </style>
 </head>
 <body>
     <!-- 頂部導航欄 -->
@@ -31,7 +27,7 @@
         <section id="homeView" class="view-page active">
             <div class="hero-header">
                 <h1>請選擇古詩文練習專區</h1>
-                <p>完整收錄《歸去來兮辭》（並序）、《將進酒》、《兵車行》、《登高》四篇必背經典 · 詞語高亮精解 · 全句語法修辭全析 · 當次錯題無限重練直至全對</p>
+                <p>完整收錄《歸去來兮辭》（並序）、《將進酒》、《兵車行》、《登高》四篇必背經典 · 詞語高亮精解 · 全句語法修辭全析 · 錯題無限重練直至全對</p>
             </div>
 
             <div class="big-zones-grid">
@@ -40,7 +36,7 @@
                     <div class="zone-icon-wrap">📜</div>
                     <div class="zone-badge">第一大區</div>
                     <h2>單獨課文練習區</h2>
-                    <p>按單篇課文獨立劃分（《歸去來兮辭》、《將進酒》、《兵車行》、《登高》）。每篇課文均細分為「パート A：句中高亮詞語解釋與作用」與「パート B：全句翻譯、修辭、句式、活用、古今異義、通假字全析」兩小區。</p>
+                    <p>按單篇課文獨立劃分（《歸去來兮辭》、《將進酒》、《兵車行》、《登高》）。每篇課文均細分為「第一部分：抽取句中高亮詞語說出解釋或作用」與「第二部分：給出整句說出所有修辭、句式、詞類活用、古今異義、通假字與虛詞」兩小區。</p>
                     <div class="zone-enter-text">進入選擇課文與小區 ➔</div>
                 </div>
 
@@ -48,8 +44,8 @@
                 <div class="big-zone-btn zone-theme-purple" onclick="app.openMajorZone('zone2')">
                     <div class="zone-icon-wrap">🏛️</div>
                     <div class="zone-badge">第二大區</div>
-                    <h2>四篇全庫綜合區</h2>
-                    <p>將四篇課文全部打通混合抽取，格式與第一大區完全一致，同樣細分為「四篇綜合 · 詞語高亮解釋與作用」與「四篇綜合 · 全句修辭、句式、活用、古今異義全析」兩小區，全面檢驗背默與語法掌握度。</p>
+                    <h2>四篇課文綜合練習區</h2>
+                    <p>將四篇課文全部綜合打通，格式與第一大區完全相同，同樣細分為「第一部分：四篇綜合 · 句中高亮詞語解釋與作用」與「第二部分：四篇綜合 · 全句修辭、句式、活用、古今異義全析」兩小區，支持隨機抽題與全庫演練。</p>
                     <div class="zone-enter-text">進入四篇綜合練習 ➔</div>
                 </div>
             </div>
@@ -64,12 +60,12 @@
                 <div class="subzone-title-wrap">
                     <span id="subZoneTag" class="subzone-tag">第一大區</span>
                     <h2 id="subZoneTitle">單獨課文練習區</h2>
-                    <p id="subZoneDesc">請選擇下方任意一篇課文的「詞語精解」或「全句語法修辭全析」小區開始練習</p>
+                    <p id="subZoneDesc">請選擇下方任意一篇課文的「詞語高亮精解」或「全句語法修辭全析」小區開始練習</p>
                 </div>
             </div>
 
-            <!-- 小區卡片網格（由 app.js 動態生成） -->
-            <div id="subZoneGrid" class="subzone-grid"></div>
+            <!-- 小區卡片容器（由 app.js 動態生成） -->
+            <div id="subZoneGrid"></div>
         </section>
 
         <!-- ==================== 頁面 3：自測刷題作答頁 ==================== -->
@@ -78,9 +74,13 @@
             <div class="quiz-header-card">
                 <div class="quiz-title-group">
                     <span id="roundBadge" class="round-pill">第 1 輪：正式自測</span>
-                    <h2 id="activeQuizTitle">《歸去來兮辭》（並序） · 詞語精解</h2>
+                    <h2 id="activeQuizTitle">《歸去來兮辭》（並序）</h2>
                 </div>
                 <div class="quiz-action-group">
+                    <label class="toggle-label" title="開啟後，點擊「我做對了」或「我做錯了」會自動跳往下一題">
+                        <input type="checkbox" id="autoNextToggle" checked>
+                        <span>自評後自動下一題</span>
+                    </label>
                     <button class="btn btn-warning btn-sm" onclick="app.submitEarly()">提前結算本輪</button>
                     <button class="btn btn-danger btn-sm" onclick="app.exitQuizSession()">🚪 退出練習</button>
                 </div>
@@ -99,13 +99,13 @@
 
             <!-- 答題主體雙欄 -->
             <div class="quiz-body-grid">
-                <!-- 左側：題目、我做完了按鈕、完整答案解析、我做對了/我做錯了按鈕 -->
+                <!-- 左側：題目、「我做完了」按鈕、完整答案解析、「我做對了/我做錯了」按鈕 -->
                 <div class="question-card">
                     <div id="questionRenderArea"></div>
 
                     <div class="question-footer-nav">
                         <button id="prevBtn" class="btn btn-outline" onclick="app.prevQuestion()">⬅ 上一題</button>
-                        <span class="shortcut-tip">快捷鍵：空白鍵「我做完了」｜數字 1「我做對了」｜數字 2「我做錯了」｜左右方向鍵切題</span>
+                        <span class="shortcut-tip">快捷鍵：空白鍵「我做完了」｜數字 1「我做對了」｜數字 2「我做錯了」｜左右鍵切題</span>
                         <button id="nextBtn" class="btn btn-primary" onclick="app.nextQuestion()">下一題 ➡</button>
                         <button id="finishBtn" class="btn btn-success" onclick="app.submitQuiz(false)">✅ 結算本輪</button>
                     </div>
@@ -155,8 +155,7 @@
 
     </main>
 
-    <!-- 引入題庫數據與核心邏輯腳本（將在下一則訊息提供） -->
-    <script src="questions_data.js"></script>
+    <!-- 只需引入 app.js（已內建完整題庫與系統邏輯） -->
     <script src="app.js"></script>
 </body>
 </html>
